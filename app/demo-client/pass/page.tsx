@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Car, Clock, CheckCircle2, ChevronLeft, QrCode, X, Bell } from 'lucide-react'
 import { useTickets, useOperation } from '@/lib/store'
 
-export default function WalletPassDemo() {
+function WalletPassContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const ticketId = searchParams.get('ticketId')
@@ -219,5 +219,13 @@ export default function WalletPassDemo() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function WalletPassDemo() {
+  return (
+    <Suspense fallback={null}>
+      <WalletPassContent />
+    </Suspense>
   )
 }
