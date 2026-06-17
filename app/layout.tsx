@@ -9,28 +9,37 @@ export const metadata: Metadata = {
   applicationName: 'ADDSPOT',
   keywords: ['Valet Parking', 'Gestión de Parqueaderos', 'Control de Vehículos', 'Software Valet', 'ADDSPOT', 'Parking Management'],
   authors: [{ name: 'ADDSPOT Team' }],
-  metadataBase: new URL('https://addspot.vercel.app'), // Update this to your production domain later
+  metadataBase: new URL('https://addspot.vercel.app'),
   openGraph: {
     title: 'ADDSPOT | El Futuro del Valet Parking',
     description: 'Sistema de gestión operativa premium para servicios de Valet Parking. Control total, eficiencia y métricas en tiempo real.',
-    url: '/',
+    url: 'https://addspot.vercel.app',
     siteName: 'ADDSPOT',
     locale: 'es_ES',
     type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'ADDSPOT - El Futuro del Valet Parking',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'ADDSPOT | El Futuro del Valet Parking',
     description: 'Sistema de gestión operativa premium para servicios de Valet Parking.',
+    images: ['/opengraph-image'],
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
       { url: '/icon.png', type: 'image/png', sizes: '512x512' },
     ],
     apple: [
       { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
     ],
+    shortcut: '/icon.png',
   },
 }
 

@@ -6,11 +6,18 @@ export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default async function Image() {
+  // Fetch the logo as base64 to embed it in the edge image
+  const logoData = await fetch(
+    new URL('../public/ADDSTOP LOG.png', import.meta.url)
+  ).then((res) => res.arrayBuffer())
+
+  const logoBase64 = `data:image/png;base64,${Buffer.from(logoData).toString('base64')}`
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: 'linear-gradient(to bottom right, #0A0B0F, #1A1D2D)',
+          background: 'linear-gradient(135deg, #07090F 0%, #0E1120 50%, #111827 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -18,35 +25,37 @@ export default async function Image() {
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
+          fontFamily: 'sans-serif',
         }}
       >
-        {/* Glow Effects */}
+        {/* Glow top-left */}
         <div
           style={{
             position: 'absolute',
-            top: -200,
-            left: -200,
-            width: 800,
-            height: 800,
-            background: 'rgba(91, 127, 255, 0.5)',
+            top: -150,
+            left: -150,
+            width: 700,
+            height: 700,
+            background: 'rgba(97, 192, 191, 0.35)',
             borderRadius: '50%',
-            filter: 'blur(150px)',
+            filter: 'blur(120px)',
           }}
         />
+        {/* Glow bottom-right */}
         <div
           style={{
             position: 'absolute',
-            bottom: -200,
-            right: -200,
-            width: 800,
-            height: 800,
-            background: 'rgba(97, 192, 191, 0.5)',
+            bottom: -150,
+            right: -150,
+            width: 700,
+            height: 700,
+            background: 'rgba(91, 127, 255, 0.35)',
             borderRadius: '50%',
-            filter: 'blur(150px)',
+            filter: 'blur(120px)',
           }}
         />
 
-        {/* Branding Container */}
+        {/* Card */}
         <div
           style={{
             display: 'flex',
@@ -54,41 +63,42 @@ export default async function Image() {
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 10,
-            background: 'rgba(255, 255, 255, 0.05)',
-            padding: '80px 120px',
+            background: 'rgba(255,255,255,0.04)',
+            padding: '70px 100px',
             borderRadius: '40px',
-            border: '2px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0 30px 60px rgba(0,0,0,0.5)',
+            border: '1.5px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
+            gap: '36px',
           }}
         >
-          {/* Logo Text */}
+          {/* Logo image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logoBase64}
+            alt="ADDSPOT Logo"
+            width={480}
+            height={160}
+            style={{ objectFit: 'contain' }}
+          />
+
+          {/* Divider */}
           <div
             style={{
-              fontSize: '140px',
-              fontWeight: '900',
-              letterSpacing: '-4px',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              lineHeight: 1,
-              fontFamily: 'sans-serif',
+              width: '300px',
+              height: '2px',
+              background: 'linear-gradient(to right, transparent, rgba(97,192,191,0.6), transparent)',
             }}
-          >
-            <span style={{ color: '#61c0bf' }}>ADD</span>
-            <span style={{ color: 'rgba(255, 255, 255, 0.95)' }}>SPOT</span>
-            <span style={{ color: '#5B7FFF', fontSize: '100px', marginLeft: '20px' }}>✨</span>
-          </div>
+          />
 
           {/* Tagline */}
           <div
             style={{
-              fontSize: '42px',
-              color: 'rgba(255, 255, 255, 0.7)',
+              fontSize: '38px',
+              color: 'rgba(255,255,255,0.65)',
               fontWeight: 500,
-              marginTop: '40px',
-              letterSpacing: '2px',
+              letterSpacing: '3px',
               textAlign: 'center',
-              fontFamily: 'sans-serif',
+              textTransform: 'uppercase',
             }}
           >
             El Futuro del Valet Parking
@@ -96,8 +106,6 @@ export default async function Image() {
         </div>
       </div>
     ),
-    {
-      ...size,
-    }
+    { ...size }
   )
 }
